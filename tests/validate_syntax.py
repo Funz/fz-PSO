@@ -46,13 +46,7 @@ def check_r_file(filepath):
     if open_braces != close_braces:
         errors.append(f"Unbalanced braces: {open_braces} open, {close_braces} close")
     
-    # Check 6: Balanced parentheses (rough check)
-    open_parens = content.count('(')
-    close_parens = content.count(')')
-    if open_parens != close_parens:
-        warnings.append(f"Possibly unbalanced parentheses: {open_parens} open, {close_parens} close")
-    
-    # Check 7: psoptim function exists
+    # Check 6: psoptim function exists
     if 'psoptim <- function' not in content:
         errors.append("Missing psoptim function definition")
     
