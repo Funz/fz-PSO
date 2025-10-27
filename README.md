@@ -70,6 +70,32 @@ This implementation has been adapted from the original algorithm-PSO plugin to w
 4. Added `get_analysis_tmp` method for intermediate progress reporting
 5. Enhanced HTML visualization support with base64-encoded images
 
+## Testing
+
+Basic structure tests are available in `tests/test_basic.R`. To run:
+
+```bash
+Rscript tests/test_basic.R
+```
+
+An example optimization of the Branin function is provided in `examples/branin_example.R`:
+
+```bash
+Rscript examples/branin_example.R
+```
+
+## Directory Structure
+
+```
+.fz/
+└── algorithms/
+    └── PSO.R          # Main algorithm implementation
+tests/
+└── test_basic.R       # Basic structure tests
+examples/
+└── branin_example.R   # Example usage
+```
+
 ## License
 
 Same as original Funz algorithms.
