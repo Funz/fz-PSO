@@ -1,0 +1,17 @@
+# R files
+.Rhistory
+.RData
+.Rproj.user
+*.Rproj
+
+# PSO output files
+PSO_*.out
+pso_plot_*.png
+
+# Temporary files
+*.tmp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

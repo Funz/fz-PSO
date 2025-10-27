@@ -80,24 +80,30 @@ get_initial_design.PSO <- function(obj, input_variables, output_variables) {
   library(templr)
   wd <- getwd()
   
+  # Capture variables for future
+  id <- obj$state$id
+  d <- obj$state$d
+  seed <- obj$options$seed
+  maxit <- obj$options$maxit
+  
   # Start async PSO optimization job
   obj$state$job <- future(evaluator = plan("multisession"), lazy = FALSE, {
-    sink(file.path(wd, paste0('PSO_', obj$state$id, '.out')), type = 'output')
+    sink(file.path(wd, paste0('PSO_', id, '.out')), type = 'output')
     print("Starting psoptim()")
-    set.seed(obj$options$seed)
+    set.seed(seed)
     o <- psoptim(
       par = (min_input(input_variables) + max_input(input_variables)) / 2,
       fn = function(x) {
-        ask_Y(id = obj$state$id, x = matrix(x, ncol = obj$state$d))
+        ask_Y(id = id, x = matrix(x, ncol = d))
       },
       lower = min_input(input_variables),
       upper = max_input(input_variables),
-      control = list(maxit = obj$options$maxit, vectorized = TRUE)
+      control = list(maxit = maxit, vectorized = TRUE)
     )
     print("psoptim() ended")
     print(o)
     sink(type = 'output')
-    ask_Y(id = obj$state$id, matrix(NaN, ncol = obj$state$d))
+    ask_Y(id = id, matrix(NaN, ncol = d))
   })
   
   obj$state$i <- 0
